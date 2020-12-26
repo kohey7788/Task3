@@ -1,0 +1,19 @@
+<h2>Editing Book </h2>
+<% if @book.errors.any? %>
+<%= @book.errors.count %>件のerror
+<% @book.errors.full_messages.each do |message| %>
+<%= message %>
+<% end %>
+<% end %>
+
+<%= form_with model:@book, local:true do |f| %>
+  <h4>title</h4>
+  <%= f.text_field :title, autofocus: true %>
+  <h4>opinion</h4>
+  <%= f.text_field :body %>
+  <div>
+  <%= f.submit "Update Book" %>
+  </div>
+<% end %>
+<span><%= link_to "Show", book_path(@book),class:"btn-danger" %></span>
+<span><%= link_to "Back", books_path %></span>
