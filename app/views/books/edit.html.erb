@@ -1,19 +1,25 @@
-<h2>Editing Book </h2>
-<% if @book.errors.any? %>
-<%= @book.errors.count %>件のerror
-<% @book.errors.full_messages.each do |message| %>
-<%= message %>
-<% end %>
-<% end %>
+<div class = "container">
+  <div class = "row">
+    <div class = "col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <h2>Editing Book </h2>
+      <% if @book.errors.any? %>
+      <%= @book.errors.count %>件のerror
+      <% @book.errors.full_messages.each do |message| %>
+      <%= message %>
+      <% end %>
+      <% end %>
 
-<%= form_with model:@book, local:true do |f| %>
-  <h4>title</h4>
-  <%= f.text_field :title, autofocus: true %>
-  <h4>opinion</h4>
-  <%= f.text_field :body %>
-  <div>
-  <%= f.submit "Update Book" %>
+      <%= form_with model:@book, local:true do |f| %>
+        <h4>title</h4>
+        <%= f.text_field :title, autofocus: true %>
+        <h4>opinion</h4>
+        <%= f.text_field :body %>
+        <div>
+        <%= f.submit "Update Book", class: "btn btn-success" %>
+        </div>
+      <% end %>
+      <span><%= link_to "Show", book_path(@book) %></span>
+      <span><%= link_to "Back", books_path %></span>
+    </div>
   </div>
-<% end %>
-<span><%= link_to "Show", book_path(@book),class:"btn-danger" %></span>
-<span><%= link_to "Back", books_path %></span>
+</div>

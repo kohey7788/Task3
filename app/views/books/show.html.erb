@@ -1,54 +1,66 @@
-<div>
-  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg" %>
-  <table>
-    <tbody>
-      <tr>
-	      <th>name</th>
-	      <th><%= @user.name %></th>
-      </tr>
-      <tr>
-	      <th>introduction</th>
-	      <th><%= @user.introduction %></th>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<p id="notice">
+<%= notice %>
+</p>
 
-<%= link_to '編集', edit_user_path(@user.id) %>
+<div class = "container">
+  <div class = "row">
+    <div class = "col-md-3">
+      <div>
+        <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg" %>
+        <table class = "table">
+          <tbody>
+            <tr>
+      	      <th>name</th>
+      	      <th><%= @user.name %></th>
+            </tr>
+            <tr>
+      	      <th>introduction</th>
+      	      <th><%= @user.introduction %></th>
+            </tr>
+          </tbody>;
+        </table>
+      </div>
 
-<div>
-  <h1>New book</h1>
-  <%= form_with model: @book_new, local:true do |f| %>
-    <h4>title</h4>
-    <%= f.text_field :title %>
-    <h4>opinion</h4>
-    <%= f.text_area :body %>
-    <div><%= f.submit 'Create Book' %></div>
-  <% end %>
-</div>
+      <%= link_to '', edit_user_path(@user.id), class: "fas fa-user-cog btn btn-outline-secondary btn-block" %>
 
-<div>
-  <h1>Book detail</h1>
-    <table>
-  		<tbody>
-  		  <tr>
-          <td>
-            <div><%= attachment_image_tag @user, :profile_image, size: "40x40", fallback: "no_image.jpg" %></div>
-            <div><%= link_to @user.name ,user_path(@user) %></div>
-          </td>
-          <td><%= @book.title %></td>
-          <td><%= @book.body %></td>
-          <td>
-            <% if @book.user_id == current_user.id %>
-            <%= link_to "Edit", edit_book_path(@book) %>
-            <% end %>
-          </td>
-          <td>
-            <% if @book.user_id == current_user.id %>
-            <%= link_to "Destroy", book_path(@book), method: :delete %>
-            <% end %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <div>
+        <h1>New book</h1>
+        <%= form_with model: @book_new, local:true do |f| %>
+          <h4>title</h4>
+          <%= f.text_field :title %>
+          <h4>opinion</h4>
+          <%= f.text_area :body %>
+          <div><%= f.submit 'Create Book', class: "btn btn-success" %></div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class = "col-md-8 offset-md-1">
+      <h1>Book detail</h1>
+        <table class = "table table-inverse table-hover users-table">
+      		<tbody>
+      		  <tr>
+              <td>
+                <%= link_to user_path(@user) do %>
+                <div><%= attachment_image_tag @user, :profile_image, size: "40x40", fallback: "no_image.jpg" %></div>
+                <div><%= @user.name %></div>
+                <% end %>
+              </td>
+              <td><%= @book.title %></td>
+              <td><%= @book.body %></td>
+              <td>
+                <% if @book.user_id == current_user.id %>
+                <%= link_to "Edit", edit_book_path(@book), class: "btn btn-sm btn-success" %>
+                <% end %>
+              </td>
+              <td>
+                <% if @book.user_id == current_user.id %>
+                <%= link_to "Destroy", book_path(@book), method: :delete, class: "btn btn-sm btn-danger" %>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
 </div>
